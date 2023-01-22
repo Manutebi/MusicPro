@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MusicPRO</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+</head>
+
+<body id="intro" class="bg-image shadow-2-strong">
+            <div class="m-0 vh-100 row justify-content-center align-items-center">
+                <div class="col-8 col-md-4">
+                    <div class="card d-flex justify-content-center align-items-center text-center">
+                        <img class="card-img-top" src="{% static 'images/img/LOGITO3.png' %}" alt="logo">
+                        <div class="card-body">
+                            <hr>
+                            <form action="" method="post" class="form-group">
+                                {% csrf_token %}
+                                {{form | crispy}}
+                                <hr>
+                                <div class="float-start">
+                                    <a href="{% url 'home' %}" class="" style="color:#7c42dd;text-decoration:none">Ir al
+                                        Home</a> |
+                                    <a href="{% url 'login' %}" style="color:#7c42dd;text-decoration:none">Iniciar
+                                        Sesión</a>
+                                </div>
+                                <button type="reset" href="{% url 'home' %}" class="btn btn-primary "
+                                style="background-color:#7c42dd;border-color:#7c42dd">Limpiar</button>
+                                <button type="submit" href="{% url 'home' %}" class="btn btn-primary float-end"
+                                style="background-color:#7c42dd;border-color:#7c42dd">Registrar</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>

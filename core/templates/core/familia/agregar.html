@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+<div>
+    <div style="height: auto; width: 800px; margin-left: 190px;">
+        <div class="card">
+                <div class="card-body">
+                    <h1>Agregar familia</h1>
+                    <form action="" method="POST">
+                
+                        {% csrf_token %}
+                        {{form}}
+                        <br>
+                        <a class="btn btn-success float-right " href="{% url 'home' %}">Cancelar</a>
+                        <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                    </form>
+                    {{mensaje}}
+                </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

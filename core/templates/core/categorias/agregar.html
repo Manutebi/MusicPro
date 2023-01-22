@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+<div >
+    <div style="height: auto; width: 800px; margin-left: 190px;">
+        <div class="card">
+            <div class="card-body">
+                <h1>Agregar categoria</h1>
+                <form method="POST">
+                {% csrf_token %}
+                    <section>
+                        <input type="text" name="nombreCategoria" id="nombreCategoria" placeholder="Nombre de la categoria">
+                        <input type="submit" value="Guardar">
+                    </section>
+                </form>
+                {{mensaje}}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

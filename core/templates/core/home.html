@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block jumbotron %}
+
+<div class="partejumbo">
+  <div class="jumbotron">
+    <h1 class="titulo">Buenas Noticias!</h1>
+    <p class="lead">Ya se ha podido implementar el sistema de pago WebPay en nuestro sitio web!.</p>
+    <hr class="my-4">
+    <p class="medio">Éste sistema les permitirá realizar sus pagos vía débito y transferencia bancaria.</p>
+    <p class="lead"> <a class="btn btn-lg" href="#" role="button">Leer Más</a> </p>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block contenido %}
+
+  <div class="container-fluid justify-content-center">
+      <h2 style="color: aliceblue;" class="text-center">PRODUCTOS RECOMENDADOS</h2>
+    <hr>
+    <div class="row row-cols-4 justify-content-around">
+
+      {% for p in listado %}
+          {% if p.oferta %}
+          {% if p.stock %}
+          <div id="productitoseparado" class="">
+            <img src="{{ p.imagen }}" class="thumbnail" alt="imagen">
+            <div class="box-element product">
+              <h2 id="nombreproducto">
+                <strong>{{ p.nombre }}</strong>
+              </h2>
+              <hr>
+              <h5 id="marcaproducto">
+                {{ p.descripcion }}
+              </h5>
+                {% if p.precio > 0 %}
+                <h1 id="precioproducto" class="d-flex justify-content-end align-items-center">
+                  ${{ p.precio | intcomma}}
+                </h1>
+                <br>
+                <div class="d-flex justify-content-center">
+                  <a href="{% url 'carro:agregar' p.id %}" class="btn btn-outline-primary text-center">
+                    Añadir al carrito
+                  </a>
+                </div>
+                {% else %}
+                <p class="card-text">
+                  No tiene precio</p>
+                {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+    
+
+{% endblock %}

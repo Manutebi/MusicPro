@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block contenido %}
+
+<div class="container">
+    <h2>cliente API consume TBK</h2>
+    {% csrf_token %}
+         <div class="card-body">
+            TOKEN = <h5 class="card-title">{{resultado.token}}</h5>
+            URL_TBK = <p class="card-text">{{resultado.url}}</p>
+        </div>
+        <form method="POST" enctype="multipart/form-data" action="{{resultado.url}}?token_ws={{resultado.token}}">
+            <input type="text" name="token_ws" value="{{resultado.token}}" disabled>
+            <input type="submit"  value="Pagar en TBK" >              
+        </form>
+
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+{% endblock %}

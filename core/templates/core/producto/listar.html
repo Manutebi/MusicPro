@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+
+{% block scripts %}
+
+<script>
+    function eliminar_producto(id) {
+        Swal.fire({
+            "title": '¿Desea eliminar el producto seleccionado?',
+            "text": 'una vez eliminado no se puede deshacer el cambio',
+            "icon": 'question',
+            "showCancelButton": true,
+            "cancelButtonText": "Cancelar",
+            "confirmButtonText": "Aceptar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545",
+            "cancelButtonColor": "#198754"
+        })
+            .then(function (result) {
+
+                if (result.isConfirmed) {
+                    window.location.href = "/eliminarproducto/" + id + "/"
+                }
+
+
+            })
+
+    }
+
+
+</script>
+
+{% endblock %}
+
+
+
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+<div class="col-12 ">
+
+    <div class="d-flex justify-content-between">
+        <h3 class="">Listado de Productos</h3>
+        <a href="{% url 'agregar_producto' %}" class="btn btn-outline-primary">Agregar Producto</a>
+
+    </div>
+    <hr>
+    <div class="container-fluid d-flex text-center justify-content-center align-items-center" style="width: 80%; background-color: rgba(43,43,43,0.8);">
+        <div class="card-body">
+            <table class="table table-stripped table-responsive-sm clearfix justify-content-center" style="color: white;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Familia</th>
+                        <th scope="col">Opciones</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in producto %}
+                    <tr valign="middle" align="center">
+                        <td scope="row" >{% if p.imagen %}
+                            <div>
+                                <img src="{{ p.imagen.url }}" class="card-img-top" alt="imagen"
+                                    style="height: 90px; width: 90px;">
+                            </div>
+                            {% endif %}
+                        </td>
+                        <td scope="row">{{ p.nombre | title }}</td>
+                        <td scope="row">{{ p.precio | intcomma}}</td>
+                        <td scope="row">{{ p.stock }}</td>
+                        <td scope="row">{{ p.familia_id }}</td>
+                        <td scope="row">
+                            <a href="{% url 'modificar_producto' p.id %}" class="btn btn-outline-primary">Modificar</a>
+                        </td>
+                        <td scope="row">
+                            <a href="#" onclick="eliminar_producto({{ p.id }})" class="btn btn-outline-secondary">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div>
+                {% include 'core/paginator.html' %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}

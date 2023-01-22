@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block scripts %}
+<script>
+    function eliminar_categoria(id){
+        Swal.fire({
+            "title":'¿Desea eliminar la categoria seleccionada?',
+            "text": 'una vez eliminada no se puede deshacer el cambio',
+            "icon": 'question',
+            "showCancelButton": true,
+            "cancelButtonText": "Cancelar",
+            "confirmButtonText": "Aceptar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545",
+            "cancelButtonColor": "#198754"
+        })
+        .then(function(result){
+            
+            if(result.isConfirmed){
+                window.location.href= "/eliminarcategoria/"+id+"/"
+            }
+        })
+
+    }
+
+</script>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="col-12 ">
+
+    <div class="d-flex justify-content-between">
+        <h3 class="">Listado de Categorías</h3>
+        <a href="{% url 'nueva_categoria' %}" class="btn btn-outline-primary">Agregar Categoría</a>
+
+    </div>
+    <hr>
+    <div class="container-fluid d-flex text-center justify-content-center align-items-center" style="width: 80%; background-color: rgba(43,43,43,0.8);">
+        <div class="card-body">
+            <table class="table table-stripped table-responsive-sm clearfix justify-content-center" style="color: white;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Opciones</th>
+                        <th></th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in categoria %}
+                    <tr valign="middle" align="center">
+                        <td>{{ p.id }}</td>
+                        <td>{{ p.nombre }}</td>
+                        <td scope="row">
+                            <a href="{% url 'modificar_categoria' p.id %}" class="btn btn-outline-primary">Modificar</a>
+                        </td>
+                        <td>
+                            <a href="#" onclick="eliminar_categoria({{ p.id }})" class="btn btn-outline-secondary">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div>
+                {% include 'core/paginator.html' %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

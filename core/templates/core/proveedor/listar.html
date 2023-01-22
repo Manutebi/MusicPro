@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+
+{% block scripts %}
+<script>
+    function eliminar_proveedor(id){
+        Swal.fire({
+            "title":'¿Desea eliminar el proveedor seleccionado?',
+            "text": 'una vez eliminado no se puede deshacer el cambio',
+            "icon": 'question',
+            "showCancelButton": true,
+            "cancelButtonText": "Cancelar",
+            "confirmButtonText": "Aceptar",
+            "reverseButtons": true,
+            "confirmButtonColor": "#dc3545",
+            "cancelButtonColor": "#198754"
+        })
+        .then(function(result){
+            
+            if(result.isConfirmed){
+                window.location.href= "/eliminarproveedor/"+id+"/"
+            }
+
+
+        })
+
+    }
+
+
+</script>
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="col-12 ">
+
+    <div class="d-flex justify-content-between">
+        <h3 class="">Listado de Proveedores</h3>
+        <a href="{% url 'nuevo_proveedor' %}" class="btn btn-outline-primary">Agregar Proveedor</a>
+
+    </div>
+    <hr>
+    <div class="container-fluid d-flex text-center justify-content-center align-items-center" style="width: 80%; background-color: rgba(43,43,43,0.8);">
+        <div class="card-body">
+            <table class="table table-stripped table-responsive-sm clearfix justify-content-center" style="color: white;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">RUT</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Rubro</th>
+                        <th scope="col">Opciones</th>
+                        <th></th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in proveedor %}
+                    <tr valign="middle" align="center">
+                        <td>{{ p.rut }}</td>
+                        <td>{{ p.nombre }}</td>
+                        <td>{{ p.telefono }}</td>
+                        <td>{{ p.rubro }}</td>
+                        <td scope="row">
+                            <a href="{% url 'modificar_proveedor' p.id %}" class="btn btn-outline-primary">Modificar</a>
+                        </td>
+                        <td>
+                            <a href="#" onclick="eliminar_proveedor({{ p.id }})" class="btn btn-outline-secondary">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div>
+                {% include 'core/paginator.html' %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}

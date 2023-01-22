@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+
+<h2 style="color: azure; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;" class="text-center" >Instrumentos de cuerdas</h2>
+{% load humanize %}
+<div class="container">
+      <div class="row text-center">
+        {% for p in producto %}
+        {% if p.stock %}
+              <div class="col-md-4 pb-1 pb-md-0" style="width:285px; margin-top:6px;">
+                <div class="card">
+                    <div>
+                      <img src="{{ p.imagen }}" class="card-img-top" alt="imagen">
+                    </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ p.nombre }}</h5>
+                    <p class="card-text">{{ p.descripcion }}</p>
+                    <p class="card-text">${{ p.precio | intcomma }}</p>
+                    <a href="{% url 'carro:agregar_cuerda' p.id %}" class="btn btn-primary btn-outline-secondary add-btn update-cart">Añadir al carrito</a>
+                  </div>
+                </div>        
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

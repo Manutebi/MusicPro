@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MusicPRO</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+</head>
+
+<body id="intro" class="bg-image shadow-2-strong">
+    <div class="m-0 vh-100 row justify-content-center align-items-center">
+        <div class="col-8 col-md-4">
+            <div class="card d-flex justify-content-center align-items-center">
+                <img class="card-img-top" src="{% static 'images/img/LOGITO3.png' %}" alt="logo">
+                <div class="card-body">
+                    <hr>
+                    <form class="form-group" action="" method="post">
+
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <hr>
+                        
+                        <button type="submit" class="btn btn-primary float-end" onclick="location.href='home.html'" style="background-color:#7c42dd;border-color:#7c42dd">Iniciar Sesión</button>
+                    </form>
+                    <div class="float-start">
+                        <a href="{% url 'home' %}" class="" style="color:#7c42dd;text-decoration:none">Ir al
+                            Home</a> |
+                        <a href="{% url 'register' %}" style="color:#7c42dd;text-decoration:none">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
