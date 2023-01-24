@@ -24,6 +24,6 @@ class proveedor(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'core_proveedor'   
+        db_table = 'core_proveedor'
 
 
