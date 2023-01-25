@@ -1,9 +1,14 @@
-django == 3.2.3
-pillow == 8.2.0
-django-admin-interface == 0.16.3
-django-crispy-forms == 1.11.2
-django-rest-framework
-django-pwa 
-
-
-## para importar la base de datos debes usar el comando python manage.py import
+django
+pillow
+django-admin-interface
+django-crispy-forms
+asgiref
+certifi
+chardet
+idna
+pytz
+requests
+sqlparse
+urllib3
+cx_Oracle
+djangorestframework
